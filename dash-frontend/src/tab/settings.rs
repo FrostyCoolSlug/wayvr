@@ -247,6 +247,7 @@ enum SettingType {
 	UprightScreenFix,
 	UsePassthrough,
 	UseSkybox,
+	GridOpacity,
 	XrClickSensitivity,
 	XrClickSensitivityRelease,
 	XwaylandByDefault,
@@ -294,6 +295,7 @@ impl SettingType {
 			Self::XrClickSensitivityRelease => &mut config.xr_click_sensitivity_release,
 			Self::SpaceDragMultiplier => &mut config.space_drag_multiplier,
 			Self::PointerLerpFactor => &mut config.pointer_lerp_factor,
+			Self::GridOpacity => &mut config.grid_opacity,
 			_ => panic!("Requested f32 for non-f32 SettingType"),
 		}
 	}
@@ -368,6 +370,7 @@ impl SettingType {
 			Self::Clock12h => Ok("APP_SETTINGS.CLOCK_12H"),
 			Self::DoubleCursorFix => Ok("APP_SETTINGS.DOUBLE_CURSOR_FIX"),
 			Self::FocusFollowsMouseMode => Ok("APP_SETTINGS.FOCUS_FOLLOWS_MOUSE_MODE"),
+			Self::GridOpacity => Ok("APP_SETTINGS.GRID_OPACITY"),
 			Self::HandsfreePointer => Ok("APP_SETTINGS.HANDSFREE_POINTER"),
 			Self::HideGrabHelp => Ok("APP_SETTINGS.HIDE_GRAB_HELP"),
 			Self::HideUsername => Ok("APP_SETTINGS.HIDE_USERNAME"),
@@ -408,6 +411,7 @@ impl SettingType {
 			Self::BlockPosesOnKbdInteraction => Some("APP_SETTINGS.BLOCK_POSES_ON_KBD_INTERACTION_HELP"),
 			Self::CaptureMethod => Some("APP_SETTINGS.CAPTURE_METHOD_HELP"),
 			Self::DoubleCursorFix => Some("APP_SETTINGS.DOUBLE_CURSOR_FIX_HELP"),
+			Self::GridOpacity => Some("APP_SETTINGS.GRID_OPACITY_HELP"),
 			Self::HandsfreePointer => Some("APP_SETTINGS.HANDSFREE_POINTER_HELP"),
 			Self::KeyboardMiddleClick => Some("APP_SETTINGS.KEYBOARD_MIDDLE_CLICK_HELP"),
 			Self::LeftHandedMouse => Some("APP_SETTINGS.LEFT_HANDED_MOUSE_HELP"),
@@ -795,6 +799,7 @@ impl<T> TabSettings<T> {
 				slider_f32!(mp, c, SettingType::UiRoundMultiplier, 0.5, 5.0, 0.1);
 				checkbox!(mp, c, SettingType::SetsOnWatch);
 				checkbox!(mp, c, SettingType::UseSkybox);
+				slider_f32!(mp, c, SettingType::GridOpacity, 0.0, 1.0, 0.05); // min, max, step
 				checkbox!(mp, c, SettingType::UsePassthrough);
 				checkbox!(mp, c, SettingType::Clock12h);
 			}

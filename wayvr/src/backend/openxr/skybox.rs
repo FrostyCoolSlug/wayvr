@@ -161,13 +161,17 @@ impl Skybox {
             .into_iter()
             .next()
             .unwrap();
+        let set0 = pipeline.uniform_buffer_upload(
+            0,
+            vec![app.session.config.grid_opacity * app.session.config.grid_opacity],
+        )?;
         let pass = pipeline.create_pass(
             tgt.extent_f32(),
             [0.0, 0.0],
             app.gfx_extras.quad_verts.clone(),
             0..4,
             0..1,
-            vec![],
+            vec![set0],
             &Default::default(),
         )?;
 
