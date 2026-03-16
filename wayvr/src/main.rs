@@ -192,7 +192,7 @@ fn auto_run(args: Args, used_backend: &mut Option<XrBackend>) {
 
     let instructions = format!("Could not connect to runtime.\n{instructions}");
 
-    let _ = DbusConnector::notify_send("WayVR", &instructions, 1, 0, 0, false);
+    let _ = DbusConnector::notify_send("WayVR", &instructions, 1, 30000, 0, false);
 
     #[cfg(not(any(feature = "openvr", feature = "openxr")))]
     compile_error!("No VR support! Enable either openvr or openxr features!");
